@@ -699,6 +699,20 @@
         .tema-btn { margin-left: .3rem; }
         section.bloque, .eje { scroll-margin-top: 5rem; }
       }
+
+      /* ---------- Boton de tema flotante, fuera de la barra ---------- */
+      .tema-btn.tema-flotante {
+        position: fixed; z-index: 70; margin: 0;
+        right: max(1rem, env(safe-area-inset-right));
+        bottom: max(1rem, calc(env(safe-area-inset-bottom) + .5rem));
+        min-height: 3rem; padding: .5rem 1.1rem;
+        box-shadow: inset 0 1px 0 var(--glass-hi), 0 10px 28px rgba(0,0,0,.28);
+      }
+      @media (max-width: 760px) {
+        .tema-btn.tema-flotante { margin: 0; width: 3.25rem; height: 3.25rem; min-height: 3.25rem; padding: 0; justify-content: center; border-radius: 50%; }
+        .tema-btn.tema-flotante #btnTemaTxt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .tema-btn.tema-flotante svg { width: 22px; height: 22px; }
+      }
     </style>
   </head>
   <body>
@@ -734,11 +748,6 @@
         <a href="#sala" data-sec="sala">Texto de sala</a>
         <a href="#ficha" data-sec="ficha">Ficha de la obra</a>
         <a href="#descarga" data-sec="descarga">Descargar la foto</a>
-        <button type="button" class="tema-btn" id="btnTema" aria-label="Cambiar a modo claro">
-          <svg class="ico-sol" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
-          <svg class="ico-luna" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2z"/></svg>
-          <span id="btnTemaTxt">Modo claro</span>
-        </button>
       </div>
     </nav>
 
@@ -910,6 +919,13 @@
         <p>Luis Leonardo Solis Hernández · Alexis Gabriel Olalde Pacheco · Bruno Bouchan Dé La Vega — CDIA, 3.er semestre</p>
       </div>
     </footer>
+
+    <!-- ============ BOTON DE TEMA (flotante) ============ -->
+    <button type="button" class="tema-btn tema-flotante" id="btnTema" aria-label="Cambiar a modo claro">
+      <svg class="ico-sol" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      <svg class="ico-luna" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2z"/></svg>
+      <span id="btnTemaTxt">Modo claro</span>
+    </button>
 
     <!-- ============ VISOR ============ -->
     <div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Vista ampliada de la obra Génesis">
