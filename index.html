@@ -684,6 +684,21 @@
       @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
         .toc, .intro, .ejes-indice a, .eje, .ficha, .sala, .descarga, footer { background: var(--panel); }
       }
+
+      /* ---------- Correccion movil: navegacion en una sola fila ---------- */
+      @media (max-width: 760px) {
+        .toc { top: .5rem; margin-top: .5rem; width: calc(100% - 1rem); border-radius: 999px; }
+        .toc-inner {
+          flex-wrap: nowrap; gap: .3rem;
+          overflow-x: auto; -webkit-overflow-scrolling: touch;
+          scrollbar-width: none; overscroll-behavior-x: contain;
+          padding: .35rem .5rem;
+        }
+        .toc-inner::-webkit-scrollbar { display: none; }
+        .toc a, .tema-btn { white-space: nowrap; flex: 0 0 auto; min-height: 2.5rem; }
+        .tema-btn { margin-left: .3rem; }
+        section.bloque, .eje { scroll-margin-top: 5rem; }
+      }
     </style>
   </head>
   <body>
@@ -954,7 +969,14 @@
             entradas.forEach(function (e) {
               if (e.isIntersecting) {
                 enlaces.forEach(function (a) {
-                  a.classList.toggle("activo", a.getAttribute("data-sec") === e.target.id);
+                  var on = a.getAttribute("data-sec") === e.target.id;
+                  a.classList.toggle("activo", on);
+                  if (on) {
+                    var c = document.getElementById("tocInner");
+                    if (c && c.scrollWidth > c.clientWidth) {
+                      c.scrollTo({ left: a.offsetLeft - (c.clientWidth - a.offsetWidth) / 2, behavior: reduceMotion ? "auto" : "smooth" });
+                    }
+                  }
                 });
               }
             });
